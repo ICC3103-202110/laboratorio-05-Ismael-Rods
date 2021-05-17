@@ -1,12 +1,17 @@
-const { printTable } = require('console-table-printer');
+const {printTable} = require('console-table-printer')
+const {getTitle, getTable} = require('./view')  //simil import getTitle from view.js
 
-//Create a table
-const testCases = [
-  { index: 3, text: 'I would like some gelb bananen bitte', value: 100 },
-  { index: 4, text: 'I hope batch update is working', value: 300 },
-];
+//Impure
+async function app(state,update,view){
+    const {model, currentView} = state
+    const {title, table} = currentView
+    console.clear()
+    console.log(title)
+    printTable(table)
+}
 
-//print
-printTable(testCases);
+module.exports = {
+  app
+}
 
 
