@@ -1,7 +1,6 @@
 const figlet = require('figlet')
 const chalk = require('chalk')
-const prompt = require('prompt-sync')
-
+const inquirer = require('inquirer')
 function getTitle(){
     return chalk.green(
         figlet.textSync('Tip Calculator App',
@@ -21,23 +20,50 @@ function getTable(model){
     ]
 }
 
+function inputf(model){
+    const {input1,input2} = model
+    return inquirer.prompt([
+        {
+            name: 'input1',
+            type: 'input',
+            message: 'Bill Amount?',
+            default: input1,
+            validate: function(value){
+                if (value >=0 ){
+                    return true
+                }else {
+                    return 'Enter positive number'
+                }
+                
+            }
+        },
+        {
+            name: 'input2',
+            type: 'input',
+            message: 'Tip(%)?',
+            default: input2, 
+            validate: function(value){
+                if (value >=0 ){
+                    return true
+                }else {
+                    return 'Enter positive number'
+                }
+                
+            }
+        }
+    ])
+
+}
 function view(model){
     return {
         title: getTitle(),
         table: getTable(model)
     }
 }
-module.exports = {   //para que otro archivo pueda usar estas funciones de este archivo
-    getTitle,
-    getTable,
+
+module.exports = {   
     view,
+    inputf,
 }
 
-//Create a table
-const testCases = [
-  { index: 3, text: 'I would like some gelb bananen bitte', value: 100 },
-  { index: 4, text: 'I hope batch update is working', value: 300 },
-];
-
-//print
 

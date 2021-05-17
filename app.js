@@ -1,5 +1,5 @@
 const {printTable} = require('console-table-printer')
-const {getTitle, getTable} = require('./view')  //simil import getTitle from view.js
+const {inputf} = require('./view')  //simil import getTitle from view.js
 
 //Impure
 async function app(state,update,view){
@@ -8,6 +8,8 @@ async function app(state,update,view){
     console.clear()
     console.log(title)
     printTable(table)
+    const {input1} = await inputf(model)
+    console.log(input1)
 }
 
 module.exports = {
